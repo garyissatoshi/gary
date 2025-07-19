@@ -1,0 +1,13 @@
+[package]
+name = "merge-sort-kernels"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cuda_std = { git = "https://github.com/Rust-GPU/Rust-CUDA", rev = "afb147ed51fbb14b758e10a0a24dbc2311a52b82" }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dev-dependencies]
+print-no-std = "0.1.0"

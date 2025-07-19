@@ -1,0 +1,9 @@
+[package]
+name = "blake2"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[dev-dependencies]
+print-no-std = "0.1.0"

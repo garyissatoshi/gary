@@ -1,0 +1,31 @@
+[package]
+name = "gary-pool-program"
+description = "A program to coordinate GARY mining pools"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+repository.workspace = true
+readme.workspace = true
+keywords.workspace = true
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[features]
+default = []
+
+[dependencies]
+bytemuck.workspace = true
+gary-drillx.workspace = true
+gary-api.workspace = true
+gary-boost-api.workspace = true
+gary-pool-api.workspace = true
+solana-program.workspace = true
+spl-token.workspace = true
+spl-associated-token-account.workspace = true
+steel.workspace = true
+
+[dev-dependencies]
+rand = { workspace = true }

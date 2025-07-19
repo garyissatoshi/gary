@@ -1,0 +1,24 @@
+[package]
+name = "gary-boost-api"
+description = "API for interacting with the GARY boost program"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+repository.workspace = true
+keywords.workspace = true
+
+[dependencies]
+array-const-fn-init.workspace = true
+bytemuck.workspace = true
+const-crypto.workspace = true
+fixed.workspace = true
+num_enum.workspace = true
+gary-api.workspace = true
+solana-program.workspace = true
+spl-token.workspace = true
+spl-associated-token-account.workspace = true
+static_assertions.workspace = true
+steel.workspace = true
+thiserror.workspace = true

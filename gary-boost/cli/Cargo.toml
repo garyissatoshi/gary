@@ -1,0 +1,29 @@
+[package]
+name = "gary-boosts-cli"
+description = "A command line interface for the GARY boosts program."
+version.workspace = true
+license.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "gary-boosts"
+path = "src/main.rs"
+
+[features]
+default = []
+
+[dependencies]
+clap.workspace = true
+futures.workspace = true
+log.workspace = true
+gary-boost-api.workspace = true
+solana-cli-config.workspace = true
+solana-client.workspace = true
+solana-program.workspace = true
+solana-rpc-client.workspace = true
+solana-sdk.workspace = true
+solana-transaction-status.workspace = true
+spl-token.workspace = true
+spl-associated-token-account.workspace = true
+steel.workspace = true
+tokio.workspace = true

@@ -1,0 +1,10 @@
+/home/sol/gary/target/sbpf-solana-solana/release/deps/spl_token_metadata_interface-60d338a4eb0e0e7e.so: /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/lib.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/error.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/instruction.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/state.rs
+
+/home/sol/gary/target/sbpf-solana-solana/release/deps/libspl_token_metadata_interface-60d338a4eb0e0e7e.rlib: /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/lib.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/error.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/instruction.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/state.rs
+
+/home/sol/gary/target/sbpf-solana-solana/release/deps/spl_token_metadata_interface-60d338a4eb0e0e7e.d: /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/lib.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/error.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/instruction.rs /home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/state.rs
+
+/home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/lib.rs:
+/home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/error.rs:
+/home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/instruction.rs:
+/home/sol/.cargo/registry/src/index.crates.io-6f17d22bba15001f/spl-token-metadata-interface-0.6.0/src/state.rs:

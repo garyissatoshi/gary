@@ -1,0 +1,6 @@
+$ mkdir -p "/home/sol/gary/target/sbpf-solana-solana/release/build/az-9ce72fec9d40034d/out/try_track_caller"
+$ cd "/home/sol/gary/target/sbpf-solana-solana/release/build/az-9ce72fec9d40034d/out/try_track_caller"
+$ printf '%s' "// try_tra"... > "/home/sol/gary/target/sbpf-solana-solana/release/build/az-9ce72fec9d40034d/out/try_track_caller/try_track_caller.rs"
+$ cd "/home/sol/gary/target/sbpf-solana-solana/release/build/az-9ce72fec9d40034d/out/try_track_caller" && "/home/sol/.rustup/toolchains/solana/bin/rustc" "try_track_caller.rs" "--emit=dep-info,metadata" >& /dev/null
+cargo:rustc-cfg=track_caller
+$ rm -r "/home/sol/gary/target/sbpf-solana-solana/release/build/az-9ce72fec9d40034d/out/try_track_caller"

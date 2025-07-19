@@ -1,0 +1,9 @@
+[submodule "extern-crates/equix"]
+	path = extern-crates/equix
+	url = https://git.softly.com/Softly/equix
+[submodule "crates/equix-gpu-rust"]
+	path = crates/equix-gpu-rust
+	url = https://git.softly.com/Softly/equix-gpu-rust
+[submodule "extern-crates/equix-gpu-rust"]
+	path = extern-crates/equix-gpu-rust
+	url = https://git.softly.com/Softly/equix-gpu-rust

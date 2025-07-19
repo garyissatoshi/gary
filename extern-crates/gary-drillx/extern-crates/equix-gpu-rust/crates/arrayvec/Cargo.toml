@@ -1,0 +1,11 @@
+[package]
+name = "arrayvec"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = []
+cuda = ["cust_core"]
+
+[dependencies]
+cust_core = { git = "https://github.com/Rust-GPU/Rust-CUDA", rev = "afb147ed51fbb14b758e10a0a24dbc2311a52b82", optional = true }

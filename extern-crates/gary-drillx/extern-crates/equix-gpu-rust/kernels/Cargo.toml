@@ -1,0 +1,21 @@
+[package]
+name = "equix-kernels"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cuda_std = { git = "https://github.com/Rust-GPU/Rust-CUDA", rev = "afb147ed51fbb14b758e10a0a24dbc2311a52b82", optional = true }
+cust_core = { git = "https://github.com/Rust-GPU/Rust-CUDA", rev = "afb147ed51fbb14b758e10a0a24dbc2311a52b82", optional = true }
+hashx_cuda = { package = "hashx", path = "../crates/hashx", optional = true }
+hashx = { version = "0.3.3", optional = true }
+arrayvec = { path = "../crates/arrayvec", optional = true }
+merge-sort-kernels = { path = "../crates/merge_sort_gpu/kernels", optional = true }
+thiserror-no-std = "2.0.2"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["solve"]
+verify = ["hashx"]
+solve = ["cuda_std", "cust_core", "arrayvec/cuda", "merge-sort-kernels", "hashx_cuda/cuda"]

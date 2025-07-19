@@ -1,0 +1,19 @@
+[package]
+name = "equix-gpu-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cust = { git = "https://github.com/Rust-GPU/Rust-CUDA", rev = "afb147ed51fbb14b758e10a0a24dbc2311a52b82", optional = true }
+equix-kernels = { path = "kernels", optional = true, default-features = false }
+hashx = { version = "0.3.3", optional = true }
+hashx_cuda = { package = "hashx", path = "crates/hashx", optional = true }
+arrayvec = { path = "crates/arrayvec", optional = true }
+
+[build-dependencies]
+cuda_builder = { git = "https://github.com/Rust-GPU/Rust-CUDA", rev = "afb147ed51fbb14b758e10a0a24dbc2311a52b82", optional = true }
+
+[features]
+default = ["solve"]
+verify = ["equix-kernels/verify", "hashx/default"]
+solve = ["cust", "arrayvec/cuda", "cuda_builder", "hashx_cuda/cuda", "equix-kernels/solve"]

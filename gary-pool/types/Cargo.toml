@@ -1,0 +1,16 @@
+[package]
+name = "gary-pool-types"
+description = "Types for interacting with the API of a pool server"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+repository.workspace = true
+readme.workspace = true
+keywords.workspace = true
+
+[dependencies]
+gary-drillx = { path = "../../extern-crates/gary-drillx", features = ["verify"], default-features = false }
+serde = { features = ["derive"], version = "1.0" }
+solana-sdk = "=2.1"

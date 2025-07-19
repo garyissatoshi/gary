@@ -1,0 +1,37 @@
+[workspace]
+resolver = "2"
+members = ["api", "program"]
+exclude = ["gary-cli", "gary-boost", "extern-crates/gary-drillx"]
+
+[workspace.package]
+version = "3.5.0"
+edition = "2021"
+license = "Apache-2.0"
+homepage = "url"
+description = "Liquid digial gold everyone can mine"
+documentation = "https://docs.rs/gary-api/latest/gary_api/"
+repository = "https://github.com/regolith-labs/gary"
+readme = "./README.md"
+keywords = ["solana", "crypto", "mining"]
+
+[workspace.dependencies]
+array-const-fn-init = "0.1.1"
+bytemuck = "1.14.3"
+const-crypto = "0.1.0"
+gary-drillx = { path = "extern-crates/gary-drillx", features = ["verify"], default-features = false }
+mpl-token-metadata = "5.1"
+num_enum = "0.7.2"
+gary-api = { path = "api" }
+gary-boost-api = { path = "gary-boost/api" }
+solana-program = "^2.1"
+spl-token = { version = "^4", features = ["no-entrypoint"] }
+spl-associated-token-account = { version = "^6", features = [ "no-entrypoint" ] }
+steel = { features = ["spl"], version = "4.0" }
+
+[patch.crates-io]
+
+[profile.release]
+overflow-checks = true
+
+[profile.dev]
+overflow-checks = true
