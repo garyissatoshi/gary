@@ -9,7 +9,7 @@ use crate::error::Error;
 /// the member account is of interest
 /// because this is where the operator commissions will be attributed.
 /// this command will fetch and print the address and decoded data of the member account.
-/// to manage this account (claim, stake, etc), use the ore-cli.
+/// to manage this account (claim, stake, etc), use the gary-cli.
 pub async fn member_account(rpc_client: &RpcClient, keypair: &Keypair) -> Result<(), Error> {
     let (pool_pda, _) = gary_pool_api::state::pool_pda(keypair.pubkey());
     let (member_pda, _) = gary_pool_api::state::member_pda(keypair.pubkey(), pool_pda);

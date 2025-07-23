@@ -134,9 +134,13 @@ impl EpochProcessor for Config {
         }
 
         // If base reward rate is too high, decrement min difficulty by 1 and halve base reward rate.
-        if self.base_reward_rate >= BASE_REWARD_RATE_MAX_THRESHOLD && self.min_difficulty > 1 {
-            self.min_difficulty -= 1;
-            self.base_reward_rate /= 2;
+        if self.base_reward_rate > BASE_REWARD_RATE_MAX_THRESHOLD {
+            while self.base_reward_rate > BASE_REWARD_RATE_MAX_THRESHOLD {
+                self.base_reward_rate >>= 1;
+            }
+            if self.min_difficulty > 1 {
+                self.min_difficulty -= 1;
+            }
         }
 
         Ok(amount_to_mint)

@@ -77,6 +77,7 @@ impl Miner {
             send_client = self.jito_client.clone();
         }
         if jito_tip > 0 {
+            // from https://jito-foundation.gitbook.io/mev/mev-payment-and-distribution/on-chain-addresses
             let tip_accounts = [
                 "96gYZGLnJYVFmbjzopPSU6QiEV5fGqZNyN9nmNhvrZU5",
                 "HFqU5x63VTqvQss8hp11i4wVV8bD44PvwucfZ2bU7gRe",

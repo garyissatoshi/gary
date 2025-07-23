@@ -16,8 +16,6 @@ use solana_sdk::{
     commitment_config::CommitmentConfig,
     signature::{read_keypair_file, Keypair},
 };
-use gary_api::consts::{MINT_ADDRESS, TREASURY_ADDRESS};
-use gary_api::prelude::{BUS_ADDRESSES, TREASURY_TOKENS_ADDRESS};
 use utils::{PoolMiningData, SoloMiningData, Tip};
 
 // TODO: Unify balance and proof into "account"
@@ -34,9 +32,9 @@ struct Miner {
     pub rpc_client: Arc<RpcClient>,
     pub fee_payer_filepath: Option<String>,
     pub jito_client: Arc<RpcClient>,
-    pub tip: Arc<std::sync::RwLock<u64>>,
-    pub solo_mining_data: Arc<std::sync::RwLock<Vec<SoloMiningData>>>,
-    pub pool_mining_data: Arc<std::sync::RwLock<Vec<PoolMiningData>>>,
+    pub tip: Arc<RwLock<u64>>,
+    pub solo_mining_data: Arc<RwLock<Vec<SoloMiningData>>>,
+    pub pool_mining_data: Arc<RwLock<Vec<PoolMiningData>>>,
 }
 
 #[derive(Subcommand, Debug)]
@@ -46,7 +44,7 @@ enum Commands {
 
     #[command(about = "Benchmark your machine's hashpower")]
     Benchmark(BenchmarkArgs),
-    
+
     #[command(about = "Initialize all necessary accounts for miner")]
     Open(OpenArgs),
 
@@ -146,11 +144,6 @@ struct Args {
 
 #[tokio::main]
 async fn main() {
-    dbg!(TREASURY_TOKENS_ADDRESS);
-    dbg!(TREASURY_ADDRESS);
-    dbg!(MINT_ADDRESS);
-    dbg!(BUS_ADDRESSES);
-    // return;
     let args = Args::parse();
 
     // Load the config file from custom path, the default path, or use default config values
@@ -170,7 +163,6 @@ async fn main() {
     let default_keypair = args.keypair.unwrap_or(cli_config.keypair_path.clone());
     let fee_payer_filepath = args.fee_payer.unwrap_or(default_keypair.clone());
     let rpc_client = RpcClient::new_with_commitment(cluster, CommitmentConfig::confirmed());
-    // todo: replace
     let jito_client =
         RpcClient::new("https://mainnet.block-engine.jito.wtf/api/v1/transactions".to_string());
 
@@ -180,7 +172,6 @@ async fn main() {
     let pool_mining_data = Arc::new(RwLock::new(Vec::new()));
 
     if args.jito {
-        // todo: replace
         let url = "ws://bundles-api-rest.jito.wtf/api/v1/bundles/tip_stream";
         let (ws_stream, _) = connect_async(url).await.unwrap();
         let (_, mut read) = ws_stream.split();
@@ -191,7 +182,7 @@ async fn main() {
                     if let Ok(tips) = serde_json::from_str::<Vec<Tip>>(&text) {
                         for item in tips {
                             let mut tip = tip_clone.write().unwrap();
-                            *tip = (item.landed_tips_50th_percentile * (10_f64).powf(9.0)) as u64;
+                            *tip = (item.landed_tips_50th_percentile * 10_f64.powf(9.0)) as u64;
                         }
                     }
                 }
@@ -220,9 +211,7 @@ async fn main() {
         Commands::Benchmark(args) => {
             miner.benchmark(args).await;
         }
-        Commands::Open(_) => {
-            miner.open().await
-        }
+        Commands::Open(_) => miner.open().await,
         Commands::Claim(args) => {
             if let Err(err) = miner.claim(args).await {
                 println!("{:?}", err);
@@ -256,6 +245,7 @@ async fn main() {
 }
 
 impl Miner {
+    #[allow(clippy::too_many_arguments)]
     pub fn new(
         rpc_client: Arc<RpcClient>,
         priority_fee: Option<u64>,
@@ -264,9 +254,9 @@ impl Miner {
         dynamic_fee: bool,
         fee_payer_filepath: Option<String>,
         jito_client: Arc<RpcClient>,
-        tip: Arc<std::sync::RwLock<u64>>,
-        solo_mining_data: Arc<std::sync::RwLock<Vec<SoloMiningData>>>,
-        pool_mining_data: Arc<std::sync::RwLock<Vec<PoolMiningData>>>,
+        tip: Arc<RwLock<u64>>,
+        solo_mining_data: Arc<RwLock<Vec<SoloMiningData>>>,
+        pool_mining_data: Arc<RwLock<Vec<PoolMiningData>>>,
     ) -> Self {
         Self {
             rpc_client,
@@ -285,7 +275,7 @@ impl Miner {
     pub fn signer(&self) -> Keypair {
         match self.keypair_filepath.clone() {
             Some(filepath) => read_keypair_file(filepath.clone())
-                .expect(format!("No keypair found at {}", filepath).as_str()),
+                .unwrap_or_else(|_| panic!("No keypair found at {}", filepath)),
             None => panic!("No keypair provided"),
         }
     }
@@ -293,7 +283,7 @@ impl Miner {
     pub fn fee_payer(&self) -> Keypair {
         match self.fee_payer_filepath.clone() {
             Some(filepath) => read_keypair_file(filepath.clone())
-                .expect(format!("No fee payer keypair found at {}", filepath).as_str()),
+                .unwrap_or_else(|_| panic!("No fee payer keypair found at {}", filepath)),
             None => panic!("No fee payer keypair provided"),
         }
     }

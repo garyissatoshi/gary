@@ -55,7 +55,7 @@ pub fn validate_attribution(
         ));
     }
 
-    // Validate the first non-compute budget/lighthouse instruction as an ore pool attribution instruction
+    // Validate the first non-compute budget/lighthouse instruction as an gary pool attribution instruction
     let attr_idx = first_non_allowed_prefix_idx;
     let attr_ix = &instructions[attr_idx];
     let attr_program_id = transaction

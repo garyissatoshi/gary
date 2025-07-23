@@ -69,13 +69,12 @@ impl Miner {
                     gary_addresses
                 ]
             })),
-            // todo: replace account
             FeeStrategy::Quiknode => Some(json!({
                 "jsonrpc": "2.0",
                 "id": "1",
                 "method": "qn_estimatePriorityFees",
                 "params": {
-                    "account": "oreV2ZymfyeXgNgBdqMkumTqqAprVqgBWQfoYkrtKWQ",
+                    "account": gary_api::ID.to_string(),
                     "last_n_blocks": 100
                 }
             })),
@@ -118,7 +117,7 @@ impl Miner {
             FeeStrategy::Quiknode => response["result"]["per_compute_unit"]["medium"]
                 .as_f64()
                 .map(|fee| fee as u64)
-                .ok_or_else(|| format!("Please enable the Solana Priority Fee API add-on in your QuickNode account.")),
+                .ok_or_else(|| "Please enable the Solana Priority Fee API add-on in your QuickNode account.".to_string()),
             FeeStrategy::Alchemy => response["result"]
                 .as_array()
                 .and_then(|arr| {
@@ -167,16 +166,10 @@ impl Miner {
 
     pub async fn local_dynamic_fee(&self) -> Result<u64, Box<dyn std::error::Error>> {
         let client = self.rpc_client.clone();
-        // todo: replace accounts
-        let pubkey = [
-            "oreV2ZymfyeXgNgBdqMkumTqqAprVqgBWQfoYkrtKWQ",
-            "5HngGmYzvSuh3XyU11brHDpMTHXQQRQQT4udGFtQSjgR",
-            "2oLNTQKRb4a2117kFi6BYTUDu3RPrMVAHFhCfPKMosxX",
-        ];
-        let address_strings = pubkey;
-
         // Convert strings to Pubkey
-        let addresses: Vec<Pubkey> = address_strings
+        let addresses: Vec<Pubkey> = [
+            gary_api::id().to_string().as_str()
+        ]
             .into_iter()
             .map(|addr_str| Pubkey::from_str(addr_str).expect("Invalid address"))
             .collect();

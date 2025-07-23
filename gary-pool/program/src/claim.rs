@@ -2,7 +2,7 @@ use gary_api::prelude::*;
 use gary_pool_api::prelude::*;
 use steel::*;
 
-/// Claim allows a member to claim their ORE rewards from the pool.
+/// Claim allows a member to claim their GARY rewards from the pool.
 pub fn process_claim(accounts: &[AccountInfo<'_>], data: &[u8]) -> ProgramResult {
     // Parse args.
     let args = gary_pool_api::instruction::Claim::try_from_bytes(data)?;
@@ -62,7 +62,7 @@ pub fn process_claim(accounts: &[AccountInfo<'_>], data: &[u8]) -> ProgramResult
         }
     }
 
-    // If we still have tokens to claim after claiming from pool tokens, claim from ore program
+    // If we still have tokens to claim after claiming from pool tokens, claim from gary program
     let remaining_amount = amount - amount_claimed;
     if remaining_amount > 0 {
         invoke_signed(

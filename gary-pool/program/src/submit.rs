@@ -3,7 +3,7 @@ use gary_api::prelude::*;
 use gary_pool_api::prelude::*;
 use steel::*;
 
-/// Submit sends the pool's best hash to the ORE mining contract.
+/// Submit sends the pool's best hash to the GARY mining contract.
 pub fn process_submit(accounts: &[AccountInfo<'_>], data: &[u8]) -> ProgramResult {
     // Parse args.
     let args = Submit::try_from_bytes(data)?;
@@ -28,7 +28,7 @@ pub fn process_submit(accounts: &[AccountInfo<'_>], data: &[u8]) -> ProgramResul
     instructions_sysvar.is_sysvar(&sysvar::instructions::ID)?;
     slot_hashes_sysvar.is_sysvar(&sysvar::slot_hashes::ID)?;
 
-    // Build instruction for submitting solution to the ORE program
+    // Build instruction for submitting solution to the GARY program
     let solution = Solution::new(args.digest, args.nonce);
     let mut mine_accounts = vec![
         signer_info.clone(),

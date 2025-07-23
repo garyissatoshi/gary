@@ -4,6 +4,7 @@ mod deactivate;
 mod initialize;
 mod new;
 mod update_boost;
+mod rotate;
 
 use std::sync::Arc;
 
@@ -75,6 +76,9 @@ enum Commands {
 
     #[command(about = "Fetch the config")]
     Config(ConfigArgs),
+
+    #[command(about = "Rotate boosts")]
+    Rotate
 }
 
 #[tokio::main]
@@ -118,6 +122,9 @@ async fn main() {
         }
         Commands::Config(_) => {
             cli.config().await.unwrap();
+        },
+        Commands::Rotate => {
+            cli.rotate().await.unwrap();
         }
     };
 }
